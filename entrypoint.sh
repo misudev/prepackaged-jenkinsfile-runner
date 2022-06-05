@@ -62,10 +62,10 @@ run() {
       echo "scmfile not found. Generate scmfile.yaml with Github Actions..."
       touch scmfile.yaml
       
-      yq -i '.credential.usernamePassword.password = "${{ secrets.GITHUB_TOKEN }}"' scmfile.yaml
-      yq -i '.credential.usernamePassword.username = "${{ github.actor }}"' scmfile.yaml
-      yq -i '.scm.git.userRemoteConfigs.url = "${{ github.repositoryUrl }}"' scmfile.yaml
-      yq -i '.scm.git.branches = "${{ github.ref_name }}"' scmfile.yaml
+      yq -i '.credential.usernamePassword.password = ${{ secrets.GITHUB_TOKEN }}' scmfile.yaml
+      yq -i '.credential.usernamePassword.username = ${{ github.actor }}' scmfile.yaml
+      yq -i '.scm.git.userRemoteConfigs.url = ${{ github.repositoryUrl }}' scmfile.yaml
+      yq -i '.scm.git.branches = ${{ github.ref_name }}' scmfile.yaml
       
       cat scmfile.yaml
       /app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins --scm=scmfile.yaml
