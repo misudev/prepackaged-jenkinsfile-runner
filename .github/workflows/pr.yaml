@@ -4,7 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Switch the action to use the Dockerfile.build
         run: |
@@ -12,8 +12,8 @@ jobs:
           mv Dockerfile.build Dockerfile
 
       - name: Test; jenkinsfile-runner-prepackaged
-        uses: ./prepackaged-jenkinsfile-runner
+        uses: ./test
         with:
-          jenkinsfile: "test/Jenkinsfile"
-          plugins: "test/plugins.txt"
+          jenkinsfile: "Jenkinsfile"
+          plugins: "plugins.txt"
           command: "lint"
