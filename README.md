@@ -8,25 +8,48 @@
 
 modification: prepackaged jenkinsfile-runner with Github Action Context
 
-- scmfile.yaml : Mentioned in [JenkinsFile-Runner-SCM-Docs](https://github.com/jenkinsci/jenkinsfile-runner/blob/master/docs/using/SCM.adoc). if not exists, github action will generate some default properties based on github actions.
+- scmfile.yaml : Mentioned in [JenkinsFile-Runner-SCM-Docs](https://github.com/jenkinsci/jenkinsfile-runner/blob/master/docs/using/SCM.adoc). 
+- With variable-substitution github action, you can use jenkins credentials & scm options with this github actions;
 
-- Generated scmfiles.yaml file properties;
+```yaml
+    - name: Replace scmfile.yaml With Custom Value
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: scmfile.yaml
+      env:
+        credential.usernamePassword.password: ${{ secrets.GITHUB_TOKEN }}
+        credential.usernamePassword.username: ${{ github.actor }}
+        scm.git.userRemoteConfig.url: ${{ github.repositoryUrl }}
+        scm.git.branches.name: ${{ github.ref_name }}
+          
+      # Runs a set of commands using the runners shell
+    - name: custom runnger github action
+      uses: m2ga-azure/prepackaged-jenkinsfile-runner@master
+      with:
+        jenkinsfile: Jenkinsfile
+        plugins: plugins.txt
+        scmfile: scmfile.yaml
+
+```
+<br>
+
+Thus, as you put the scmfile format in your repository, the value will be modified by substitution action and become an input of jenkinsfile runner.
 
 ```yaml
 credential:
   usernamePassword:
-    password: ${{ secrets.GITHUB_TOKEN }}
-    username: ${{ github.actor }}
+    password: will be replaced ${{ secrets.GITHUB_TOKEN }}
+    username: will be replaced  ${{ github.actor }}
 scm:
   git:
     userRemoteConfigs:
-      url: ${{ github.repositoryUrl }}
-    branches: $${{ github.ref_name }}
+      url: will be replaced ${{ github.repositoryUrl }}
+    branches: will be replaced  $${{ github.ref_name }}
 ```
 
 <br>
 
-example github repository : 
+example github repository : https://github.com/m2ga-azure/jenkinsfile-runner-example-repo
 
 
 ---
