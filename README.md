@@ -1,7 +1,35 @@
-# GitHub Actions POC for Jenkins Single-shot master
+# GitHub Actions POC for Jenkins Single-shot master - prepackaged jenkinsfile-runner
+
 
 ![Docker](https://github.com/jenkinsci/jenkinsfile-runner-github-actions/workflows/Docker/badge.svg)
 [![GitHubActions](https://img.shields.io/badge/listed%20on-GitHubActions-blue.svg)](https://github-actions.netlify.com/jenkins-single-shot)
+
+<br>
+
+modification: prepackaged jenkinsfile-runner with Github Action Context
+
+- scmfile.yaml : Mentioned in [JenkinsFile-Runner-SCM-Docs](https://github.com/jenkinsci/jenkinsfile-runner/blob/master/docs/using/SCM.adoc). if not exists, github action will generate some default properties based on github actions.
+
+- Generated scmfiles.yaml file properties;
+
+```yaml
+credential:
+  usernamePassword:
+    password: ${{ secrets.GITHUB_TOKEN }}
+    username: ${{ github.actor }}
+scm:
+  git:
+    userRemoteConfig:
+      url: ${{ github.repositoryUrl }}
+    branches: $${{ github.ref_name }}
+```
+
+<br>
+
+example github repository : 
+
+
+---
 
 This is a POC how to run _Jenkinsfiles_ inside [GitHub Actions](https://github.blog/2019-08-08-github-actions-now-supports-ci-cd/) - [GitHub's built-in CI/CD](https://github.com/features/actions) using embedded [Jenkins Single-shot masters](https://schd.ws/hosted_files/devopsworldjenkinsworld2018/8f/DWJW2018%20-%20A%20Cloud%20Native%20Jenkins.pdf).
 
@@ -167,7 +195,7 @@ In case you like to modify the [Docker base image](https://hub.docker.com/r/joni
 
 This is just a POC, in order to productize this, you would probably
 * [Automate](https://jenkins.io/blog/2018/10/16/custom-war-packager/#jenkinsfile-runner-packaging) the creation of the pre-packaged Jenkins Docker container
-* populate Jenkins environmental variables based on the [GitHub Actions context](https://developer.github.com/actions/creating-github-actions/accessing-the-runtime-environment/#environment-variables)
+~~* populate Jenkins environmental variables based on the [GitHub Actions context](https://developer.github.com/actions/creating-github-actions/accessing-the-runtime-environment/#environment-variables)~~
 * Find a better way to populate the job workspace with the content of ```/github/workspace``` other than manually copying the files over as part of your ```Jenkinsfile```
 * Find a better way to package maven binaries and additional plugins
 * Find a better way to share maven plugins other than manually mapping the local maven repo to ```/github/workspace/.m2``` in your ```Jenkinsfile```
