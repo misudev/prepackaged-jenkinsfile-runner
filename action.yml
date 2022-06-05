@@ -1,9 +1,9 @@
-name: jenkinsfile-runner-prepackaged
+name: jenkinsfile-runner-prepackaged with Github Action Context
 description: Run jenkinsfile-runner-prepackaged - with credentials
 author: inspirit941
 branding:
-  icon: monitor
-  color: purple
+  icon: archive
+  color: orange
 inputs:
   jenkinsfile:
     description: Jenkinsfile location to test
