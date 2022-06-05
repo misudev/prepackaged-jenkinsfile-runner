@@ -1,0 +1,9 @@
+credential:
+  usernamePassword:
+    password: 
+    username: 
+scm:
+  git:
+    userRemoteConfigs:
+      url: 
+    branches: 
