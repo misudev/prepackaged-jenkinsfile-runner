@@ -17,4 +17,3 @@ jobs:
           jenkinsfile: "./test/Jenkinsfile"
           plugins: "./test/plugins.txt"
           scmfile: "./test/scmfile.yaml"
-          command: "lint"
