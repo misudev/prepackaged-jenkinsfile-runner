@@ -9,7 +9,7 @@ LABEL "repository"="http://github.com/jonico/jenkinsfilerunner-github-actions"
 LABEL "homepage"="http://github.com/actions"
 LABEL "maintainer"="Johannes Nicolai <jonico@github.com>"
 
-ENV JENKINS_VERSION=2.319.3
+ENV JENKINS_VERSION=2.350
 
 COPY Jenkinsfile-helloworld /app/setup/Jenkinsfile-helloworld
 COPY base-plugins.txt /app/setup/plugins.txt
