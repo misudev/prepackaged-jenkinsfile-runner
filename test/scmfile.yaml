@@ -1,7 +1,9 @@
 credential:
   usernamePassword:
-    password: 
-    username: 
+    password: test
+    username: test
+    scope: GLOBAL
+    id: test
 scm:
   git:
     userRemoteConfigs:
