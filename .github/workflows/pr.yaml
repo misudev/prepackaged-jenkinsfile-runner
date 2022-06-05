@@ -12,8 +12,8 @@ jobs:
           mv Dockerfile.build Dockerfile
 
       - name: Test; jenkinsfile-runner-prepackaged
-        uses: ./test
+        uses: ./
         with:
-          jenkinsfile: "Jenkinsfile"
-          plugins: "plugins.txt"
+          jenkinsfile: "./test/Jenkinsfile"
+          plugins: "./test/plugins.txt"
           command: "lint"
