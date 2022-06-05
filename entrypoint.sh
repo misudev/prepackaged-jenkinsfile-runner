@@ -35,9 +35,28 @@ run() {
   echo "/app/bin/jenkinsfile-runner ${command} --war /app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins"
   if [[ -f ${scmfile} ]]; then
       echo "scmfile ${scmfile} detected"
+      cat ${scmfile}
       /app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins --scm=${scmfile}
   else
-      /app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins
+      echo "scmfile not found. Generate scmfile.yaml with Github Actions..."
+      password=$(yq '.credential.usernamePassword.password // "" ' scmfile.yaml) 
+      username=$(yq '.credential.usernamePassword.username // "" ' scmfile.yaml) 
+      url=$(yq '.scm.git.userRemoteConfig.url // "" ' scmfile.yaml) 
+      branchName=$(yq '.scm.git.branches.url // "" ' scmfile.yaml)
+      if [ "$password" != "${{ secrets.GITHUB_TOKEN }}" ] then
+        yq -i '.credential.usernamePassword.password = "${{ secrets.GITHUB_TOKEN }}"' scmfile.yaml
+      fi
+      if [ "$username" != "${{ github.actor }}" ] then 
+        yq -i '.credential.usernamePassword.username = "${{ github.actor }}"' scmfile.yaml
+      fi
+      if [ "$url" != "${{ github.repositoryUrl }}" ] then 
+        yq -i '.scm.git.userRemoteConfig.url = "${{ github.repositoryUrl }}"' scmfile.yaml
+      fi
+      if [ "$branchName" != "${{ github.ref_name }}" ] then 
+        yq -i '.scm.git.branches = "${{ github.ref_name }}"' scmfile.yaml
+      fi
+      cat scmfile.yaml
+      /app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins --scm=scmfile.yaml
   fi
 }
 
