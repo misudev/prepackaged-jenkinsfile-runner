@@ -23,7 +23,7 @@ modification: prepackaged jenkinsfile-runner with Github Action Context
         scm.git.branches.name: ${{ github.ref_name }}
           
       # Runs a set of commands using the runners shell
-    - name: custom runnger github action
+    - name: custom runner github action
       uses: m2ga-azure/prepackaged-jenkinsfile-runner@master
       with:
         jenkinsfile: Jenkinsfile
