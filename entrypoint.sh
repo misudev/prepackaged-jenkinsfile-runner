@@ -39,7 +39,7 @@ run() {
   echo "/app/bin/jenkinsfile-runner ${command} --war /app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins"
 
   cat ${scmfile}
-  /app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins --scm=${scmfile}
+  /app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins --scm ${scmfile}
 }
 
 run "${1}" "${2}" "${3}" "${4}"
