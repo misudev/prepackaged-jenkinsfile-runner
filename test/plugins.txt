@@ -1,2 +1,4 @@
 git:latest
 pipeline-model-definition:latest
+credentials:latest
+configuration-as-code:latest
