@@ -1,4 +1,4 @@
-FROM jonico/jenkinsfile-runner-github-action
+FROM ghcr.io/jenkinsci/jenkinsfile-runner-github-actions/jenkinsfile-runner-prepackaged:latest
 
 LABEL "com.github.actions.name"="Jenkinsfile Runner Prepackaged"
 LABEL "com.github.actions.description"="Runs Jenkinsfile in a pre-packaged single-shot master"

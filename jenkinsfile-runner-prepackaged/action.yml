@@ -1,6 +1,6 @@
 name: jenkinsfile-runner-prepackaged
-description: Run jenkinsfile-runner-prepackaged
-author: jenkinsci
+description: Run jenkinsfile-runner-prepackaged - with credentials
+author: inspirit941
 branding:
   icon: monitor
   color: purple
@@ -8,10 +8,14 @@ inputs:
   jenkinsfile:
     description: Jenkinsfile location to test
     default: Jenkinsfile
-    required: false
-  pluginstxt:
+    required: true
+  plugins:
     description: plugins.txt location
     default: plugins.txt
+    required: false
+  scmfile:
+    description: scmfile.txt location
+    default: scmfile.yaml
     required: false
   command:
     description: Jenkinsfile-runner command, i.e; run or lint
@@ -22,5 +26,6 @@ runs:
   image: Dockerfile
   args:
     - ${{ inputs.jenkinsfile }}
-    - ${{ inputs.pluginstxt }}
+    - ${{ inputs.plugins }}
+    - ${{ inputs.scmfile }}
     - ${{ inputs.command }}
