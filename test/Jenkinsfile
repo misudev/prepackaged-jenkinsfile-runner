@@ -2,9 +2,9 @@ pipeline {
   agent any
 
   stages {
-    stage('Git Checkout') {
+    stage('echo') {
       steps {
-        git url: "https://github.com/spring-projects/spring-petclinic.git", branch: "main"
+        echo "test"
       }
     }
   }
