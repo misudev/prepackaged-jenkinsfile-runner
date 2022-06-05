@@ -5,9 +5,8 @@ LABEL "com.github.actions.description"="Runs Jenkinsfile in a pre-packaged singl
 LABEL "com.github.actions.icon"="battery"
 LABEL "com.github.actions.color"="blue"
 
-LABEL "repository"="http://github.com/jonico/jenkinsfilerunner-github-actions"
+LABEL "repository"="https://github.com/inspirit941/prepackaged-jenkinsfile-runner"
 LABEL "homepage"="http://github.com/actions"
-LABEL "maintainer"="Johannes Nicolai <jonico@github.com>"
 
 # 
 ENV JENKINS_VERSION=2.350
