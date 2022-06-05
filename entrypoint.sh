@@ -50,11 +50,11 @@ run() {
       fi
       if [ -z $url ]
       then 
-        yq -i '.scm.git.userRemoteConfigs.url = ${{ github.repositoryUrl }}' ${scmfile}
+        yq -i '.scm.git.userRemoteConfigs.url = "${{ github.repositoryUrl }}"' ${scmfile}
       fi
       if [ -z $branchName ]
       then 
-        yq -i '.scm.git.branches = ${{ github.ref_name }}' ${scmfile}
+        yq -i '.scm.git.branches = "${{ github.ref_name }}"' ${scmfile}
       fi
       cat ${scmfile}
       /app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins --scm=${scmfile}
