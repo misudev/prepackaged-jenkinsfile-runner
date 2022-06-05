@@ -19,7 +19,7 @@ credential:
     username: ${{ github.actor }}
 scm:
   git:
-    userRemoteConfig:
+    userRemoteConfigs:
       url: ${{ github.repositoryUrl }}
     branches: $${{ github.ref_name }}
 ```
