@@ -21,6 +21,23 @@ inputs:
     description: Jenkinsfile-runner command, i.e; run or lint
     default: run
     required: false
+  token:
+      description: The GitHub token used to create an authenticated client
+      default: ${{ github.token }}
+      required: false
+  username:
+      description: The GitHub token used to create an authenticated client
+      default: ${{ github.token }}
+      required: false
+  url:
+      description: The GitHub token used to create an authenticated client
+      default: ${{ github.token }}
+      required: false
+  name:
+      description: The GitHub token used to create an authenticated client
+      default: ${{ github.token }}
+      required: false
+
 runs:
   using: docker
   image: Dockerfile
@@ -29,3 +46,7 @@ runs:
     - ${{ inputs.plugins }}
     - ${{ inputs.scmfile }}
     - ${{ inputs.command }}
+    - ${{ inputs.token }}
+    - ${{ inputs.username }}
+    - ${{ inputs.url }}
+    - ${{ inputs.name }}
