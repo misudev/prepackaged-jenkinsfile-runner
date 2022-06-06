@@ -7,6 +7,10 @@ run() {
   local plugins="${2}"
   local scmfile="${3}"
   local command="${4}"
+  local token="${5}"
+  local username="${6}"
+  local url="${7}"
+  local name="${8}"
 
   if [[ ! -f ${jenkinsfile} ]]; then
       echo "jenkinsfile ${jenkinsfile} does not exist"
@@ -17,7 +21,8 @@ run() {
       echo "plugins.txt ${plugins} does not exist"
       exit 1
   fi
- 
+
+  echo "!!! token: ${token}"
   
   plugin_manager_ver=$(java -jar /app/bin/jenkins-plugin-manager.jar --version)
   runner_ver=$(/app/bin/jenkinsfile-runner-launcher --version)
