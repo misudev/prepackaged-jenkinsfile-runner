@@ -20,7 +20,6 @@ run() {
   
   if [[ ! -f ${scmfile} ]]; then
       echo "scmfile ${scmfile} does not exist."
-      exit 1
   fi
 
   
@@ -36,10 +35,15 @@ run() {
   echo "java -jar /app/bin/jenkins-plugin-manager.jar --war /app/jenkins-${JENKINS_VERSION}.war --plugin-file ${plugins} --plugin-download-directory=/usr/share/jenkins/ref/plugins"
   java -jar /app/bin/jenkins-plugin-manager.jar --war /app/jenkins-${JENKINS_VERSION}.war --plugin-file ${plugins} --plugin-download-directory=/usr/share/jenkins/ref/plugins
   echo
-  echo "/app/bin/jenkinsfile-runner ${command} --war /app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins"
-
-  cat ${scmfile}
-  /app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins --scm ${scmfile}
+  if [[ ! -f ${scmfile} ]]; then
+      echo "scmfile ${scmfile} does not exist."
+      echo "/app/bin/jenkinsfile-runner ${command} --war /app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins"
+      /app/bin/jenkinsfile-runner ${command} --war /app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins
+  else
+    echo "/app/bin/jenkinsfile-runner ${command} --war /app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins --scm ${scmfile}"
+    cat ${scmfile}
+    /app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins --scm ${scmfile}  
+  fi
 }
 
 run "${1}" "${2}" "${3}" "${4}"
