@@ -13,7 +13,7 @@ jobs:
       - name: Replace scmfile.yaml With Custom Value
         uses: microsoft/variable-substitution@v1
         with:
-          files: "./test/scmfile.yaml"
+          files: "test/scmfile.yaml"
         env:
           credential.usernamePassword.password: ${{ secrets.GITHUB_TOKEN }}
           credential.usernamePassword.username: ${{ github.actor }}
@@ -23,6 +23,6 @@ jobs:
       - name: Test; jenkinsfile-runner-prepackaged
         uses: ./
         with:
-          jenkinsfile: "./test/Jenkinsfile"
-          plugins: "./test/plugins.txt"
-          scmfile: "./test/scmfile.yaml"
+          jenkinsfile: "test/Jenkinsfile"
+          plugins: "test/plugins.txt"
+          scmfile: "test/scmfile.yaml"
