@@ -11,7 +11,7 @@ jobs:
 #           mv Dockerfile Dockerfile.runnable
 #           mv Dockerfile.build Dockerfile
       - name: ls
-        run: echo ls
+        run: sh ls
       - name: Replace scmfile.yaml With Custom Value
         uses: microsoft/variable-substitution@v1
         with:
