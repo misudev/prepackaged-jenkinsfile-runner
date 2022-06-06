@@ -14,14 +14,10 @@ run() {
   fi
 
   if [[ ! -f ${plugins} ]]; then
-      echo "pluginstxt ${plugins} does not exist"
+      echo "plugins.txt ${plugins} does not exist"
       exit 1
   fi
-  
-  if [[ ! -f ${scmfile} ]]; then
-      echo "scmfile ${scmfile} does not exist."
-  fi
-
+ 
   
   plugin_manager_ver=$(java -jar /app/bin/jenkins-plugin-manager.jar --version)
   runner_ver=$(/app/bin/jenkinsfile-runner-launcher --version)
@@ -37,12 +33,12 @@ run() {
   echo
   if [[ ! -f ${scmfile} ]]; then
       echo "scmfile ${scmfile} does not exist."
-      echo "/app/bin/jenkinsfile-runner ${command} --war /app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins"
+      echo "/app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins"
       /app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins
   else
-      echo "/app/bin/jenkinsfile-runner ${command} --war /app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins --scm ${scmfile}"
+      echo "/app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins --scm=${scmfile}"
       cat ${scmfile}
-      /app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins --scm ${scmfile}  
+      /app/bin/jenkinsfile-runner ${command} -w=/app/jenkins-${JENKINS_VERSION} --file=${jenkinsfile} --plugins=/usr/share/jenkins/ref/plugins --scm=${scmfile}  
   fi
 }
 
