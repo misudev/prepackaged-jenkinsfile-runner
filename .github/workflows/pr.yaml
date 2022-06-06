@@ -16,3 +16,4 @@ jobs:
         with:
           jenkinsfile: "Jenkinsfile-helloworld"
           plugins: "base-plugins.txt"
+          scmfiles: "base-scmfile.yaml"
