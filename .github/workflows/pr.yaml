@@ -10,12 +10,10 @@ jobs:
 #         run: |
 #           mv Dockerfile Dockerfile.runnable
 #           mv Dockerfile.build Dockerfile
-      - name: ls
-        run: sh ls
       - name: Replace scmfile.yaml With Custom Value
         uses: microsoft/variable-substitution@v1
         with:
-          files: "test/scmfile.yaml"
+          files: "base-scmfile.yaml"
         env:
           credential.usernamePassword.password: ${{ secrets.GITHUB_TOKEN }}
           credential.usernamePassword.username: ${{ github.actor }}
@@ -25,6 +23,6 @@ jobs:
       - name: Test; jenkinsfile-runner-prepackaged
         uses: ./
         with:
-          jenkinsfile: "test/Jenkinsfile"
-          plugins: "test/plugins.txt"
-          scmfile: "test/scmfile.yaml"
+          jenkinsfile: "Jenkinsfile-helloworld"
+          plugins: "base-plugins.txt"
+          scmfile: "base-scmfile.yaml"
