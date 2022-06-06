@@ -1,0 +1,11 @@
+credentials:
+  usernamePassword:
+    password: test
+    username: test
+    scope: GLOBAL
+    id: test
+scm:
+  git:
+    userRemoteConfigs:
+      url: 
+    branches: 
