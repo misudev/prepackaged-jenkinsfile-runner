@@ -8,7 +8,7 @@
 
 modification: prepackaged jenkinsfile-runner with Github Action Context
 
-- scmfile.yaml : Mentioned in [JenkinsFile-Runner-SCM-Docs](https://github.com/jenkinsci/jenkinsfile-runner/blob/master/docs/using/SCM.adoc). 
+- scmfile.yaml : Mentioned in [JenkinsFile-Runner-SCM-Docs](https://github.com/jenkinsci/jenkinsfile-runner/blob/master/docs/using/SCM.adoc). **Optional Value**
 - With variable-substitution github action, you can use jenkins credentials & scm options with this github actions;
 
 ```yaml
